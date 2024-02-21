@@ -1,7 +1,10 @@
-import React from 'react';
-import './App.css';
+type skillDetails = {
+  skill: string;
+  level: string;
+  color: string;
+};
 
-const skills = [
+const skills: skillDetails[] = [
   {
     skill: "HTML+CSS",
     level: "advanced",
@@ -34,8 +37,67 @@ const skills = [
   },
 ];
 
-function App() {
-  return <></>
+export default function App() {
+  return (
+    <div className="card">
+      <Avatar />
+      <div className="data">
+        <Intro />
+        <SkillList />
+      </div>
+    </div>
+  );
 }
 
-export default App;
+function Intro() {
+  return (
+    <div>
+      <h1>Olayinka Emmanuel Olumuyiwa</h1>
+      <p>
+        Backend Software Engineer. When not coding or learning a new technology,
+        I like to play video games, watch Anima or just browse the web.
+      </p>
+    </div>
+  );
+}
+
+function Avatar() {
+  return (
+    <img className="avatar" src="../public/profile3.jpg" alt="profile pic" />
+  );
+}
+
+function SkillList() {
+  return (
+    <div className="skill-list">
+      {" "}
+      {skills.map((skill) => (
+        <Skill
+          skill={skill.skill}
+          color={skill.color}
+          level={skill.level}
+          key={skill.skill}
+        />
+      ))}
+    </div>
+  );
+}
+
+interface skillProps {
+  skill: string;
+  color: string;
+  level: string;
+}
+
+function Skill({ skill, color, level }: skillProps) {
+  return (
+    <div className="skill" style={{ backgroundColor: color }}>
+      <span> {skill}</span>
+      <span>
+        {level === "beginner" && "👶"}
+        {level === "intermediate" && "👍"}
+        {level === "advanced" && "💪"}
+      </span>
+    </div>
+  );
+}
